@@ -50,6 +50,6 @@ A Retrieval-Augmented Generation (RAG) chatbot designed to answer questions inte
 
 🚀 Jalankan Secara Lokal (Local Setup)
 Clone repository ini:
-'''git clone [https://github.com/azbayou/rag-chatbot-pribadi.git](https://github.com/azbayou/rag-chatbot-pribadi.git)
-cd rag-chatbot-pribadi'''
+```git clone [https://github.com/azbayou/rag-chatbot-pribadi.git](https://github.com/azbayou/rag-chatbot-pribadi.git)
+cd rag-chatbot-pribadi```
 
