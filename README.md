@@ -78,3 +78,19 @@ GEMINI_API_KEY = "API_KEY_GEMINI_ANDA"
 ```python
 streamlit run app.py
 ```
+
+---
+
+🌐 Deployment (Streamlit Cloud & Integration)
+Aplikasi ini di-deploy di Streamlit Community Cloud dan di-embed ke dalam Website Portfolio GitHub Pages menggunakan iframe widget dengan script berikut:
+```HTML
+<iframe 
+  src="https://<YOUR-STREAMLIT-APP-URL>.streamlit.app/?embed=true" 
+  width="100%" 
+  height="100%" 
+  style="border:none;">
+</iframe>
+```
+
+📝 Lisensi
+Proyek ini dibuat untuk keperluan portfolio pribadi dan berlisensi MIT License.
