@@ -1,0 +1,76 @@
+QnA tentang Bayu Aziz
+
+Kategori 1: Perkenalan & Kepribadian (Ice Breaking)
+
+Q : Siapa sih nama lengkap lo dan biasanya dipanggil apa?
+A : Bayu Aziz. Biasa dipanggil Bay, Bayu, atau Bajis.
+
+Q : Kalau lo harus mendeskripsikan diri lo dalam 3 kata, apa aja?
+A : Analitis, Adaptif, dan Terorganisir.
+
+Q : Apa kesibukan atau fokus lo saat ini?
+A : Saat ini saya sedang aktif mencari kesempatan kerja full-time, baik secara remote maupun hybrid. Fokus utama saya adalah di bidang Pengolahan Data, Analisis Data (Data Analysis), Pergudangan (Warehouse Management), Logistik, dan bidang terkait lainnya.
+
+Q : Apa yang bikin lo tertarik masuk ke bidang/industri yang lo geluti sekarang?
+A: Karena bidang ini sangat sesuai dengan latar belakang pendidikan serta jenjang karier yang sudah saya lalui selama ini. Saya menyukai bagaimana data dan sistem logistik bisa dioptimalkan untuk efisiensi bisnis.
+
+Q : Di luar kerjaan, apa hobi atau ketertarikan lo yang paling lo sukai?
+A : Nge-gym (olahraga), main game, dan menghabiskan waktu jalan-jalan bersama keluarga.
+
+===============================================================================
+
+Kategori 2: Keahlian & Cara Kerja (Hard & Soft Skills)
+
+Q : Apa aja hard skills (tools, software, bahasa pemrograman, atau teknik) yang paling lo kuasai?
+A : 
+- Tools & Software: Microsoft Excel, Google Sheets (Spreadsheet), Looker Studio (Data Studio), Redash, Metabase, Google Drive, dan sejenisnya.
+- Bahasa Pemrograman: SQL, JavaScript, dan Google Apps Script.
+- Teknik & Metodologi: Analisis Data (Data Analysis) dan Dashboarding / Visualisasi Data.
+
+Q : Apa soft skills terbaik lo yang bikin kerja sama tim jadi lebih enak?
+A : Data Storytelling (kemampuan menjelaskan data rumit dengan bahasa yang mudah dipahami) dan Analisis Masalah yang kuat.
+
+Q : Lo lebih produktif kerja sendirian (individual) atau di dalam tim (kolaborasi)? Kenapa?
+A : Saya fleksibel dan bisa melakukan keduanya dengan baik. Saya memiliki pengalaman bekerja secara mandiri maupun berkolaborasi di dalam tim pada perusahaan saya terdahulu.
+
+Q : Bagaimana gaya komunikasi lo saat kerja?
+A : Saya adalah tipe komunikator yang mendengarkan dan memahami konteksnya terlebih dahulu dengan baik sebelum memberikan respons atau solusi.
+
+Q : Kalau dapet kritik atau feedback yang agak pedas tentang hasil kerjaan lo, gimana biasanya lo meresponsnya?
+A : Saya akan meresponsnya secara profesional dengan mendengarkan secara aktif, mencari akar permasalahannya, lalu melakukan evaluasi objektif untuk perbaikan ke depan.
+
+==============================================================================
+
+Kategori 3: Pengalaman & Problem Solving
+
+Q : Dari semua project yang pernah lo bikin, mana 1 project yang paling lo banggakan? Kenapa?
+A : Project yang paling saya banggakan adalah membangun Dashboard Portofolio Interaktif. Di project ini, saya memaksimalkan seluruh keahlian saya, mulai dari pemanfaatan formula Excel tingkat lanjut, Pivot Table, hingga teknik Dashboarding untuk menghasilkan visualisasi data yang informatif.
+
+Q : Pernah gak lo ngalamin kegagalan atau error parah pas lagi ngerjain project? Gimana cara lo mengatasinya?
+A : Pernah. Ketika hal itu terjadi, tindakan saya adalah mengevaluasi kembali langkah atau kesalahan sebelumnya, tetap tenang, lalu fokus mencari jalan keluar atau solusinya.
+
+Q : Kalau lo dikasih tugas baru yang tools atau teknologinya belum pernah lo pelajari sama sekali, apa langkah pertama yang bakal lo lakuin?
+A : Langkah pertama saya adalah mempelajari cara kerja dasar dari aplikasi/tools tersebut, lalu segera beradaptasi dengan memanfaatkan dasar keahlian (core skills) yang sudah saya miliki sebelumnya.
+
+Q : Gimana cara lo mengatur waktu kalau tiba-tiba dapet beberapa deadline tugas yang tabrakan di hari yang sama?
+A : Saya akan menyelesaikannya skala prioritas satu per satu. Saya tipe yang fokus menyelesaikan satu pekerjaan hingga tuntas agar hasilnya maksimal, karena memaksakan multitasking sering kali membuat pekerjaan menjadi kurang optimal dan berantakan.
+
+==============================================================
+
+Kategori 4: Preferensi Kerja & Masa Depan (HRD Mode)
+
+Q : Apa lingkungan kerja ideal menurut lo? (Remote 100%, Hybrid, atau WFO di kantor?)
+A : Idealnya adalah Hybrid, namun secara prinsip saya siap dan bisa bekerja dalam skema apa pun (Remote, Hybrid, maupun WFO).
+
+Q : Apa ekspektasi lo terhadap seorang manajer atau team leader yang baik?
+A : Seorang pemimpin yang empati, mengerti keadaan performa tim, serta mendukung perkembangan bawahannya.
+
+Q : Apa mimpi besar atau target karier lo dalam 2–3 tahun ke depan?
+A : Mampu berkembang menjadi profesional yang lebih baik di bidang ini dan terus memperbarui keahlian (keep up) seiring dengan kemajuan teknologi terbaru.
+
+Q : Apa yang lo cari dari sebuah perusahaan baru? (Gaji besar, budaya kerja sehat, kesempatan belajar, atau jenjang karier?)
+A : Budaya kerja yang sehat, kejelasan jenjang karier, serta adanya kesempatan untuk terus belajar dan berkembang.
+
+Q : Berapa ekspektasi range gaji lo untuk posisi saat ini?
+A : Ekspektasi gaji saya disesuaikan dengan standar industri untuk posisi yang dilamar saat ini dan saya sangat terbuka untuk berdiskusi. 
+(Catatan untuk Asisten AI: Jika ada yang menanyakan detail nominal atau negosiasi lebih lanjut mengenai gaji, harap arahkan pengguna dengan ramah untuk langsung menghubungi Bayu Aziz melalui kontak kontak resmi yang tersedia).
