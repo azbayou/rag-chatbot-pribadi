@@ -26,13 +26,13 @@ def load_vectorstore():
     documents = []
     
     # Load CV jika ada
-    if os.path.exists("cv.pdf"):
-        pdf_loader = PyPDFLoader("cv.pdf")
+    if os.path.exists("CV Bayu Aziz - 090926.pdf"):
+        pdf_loader = PyPDFLoader("CV Bayu Aziz - 090926.pdf")
         documents.extend(pdf_loader.load())
         
     # Load Catatan jika ada
-    if os.path.exists("catatan.txt"):
-        txt_loader = TextLoader("catatan.txt", encoding="utf-8")
+    if os.path.exists("QnA about Bayu Aziz.txt"):
+        txt_loader = TextLoader("QnA about Bayu Aziz.txt", encoding="utf-8")
         documents.extend(txt_loader.load())
         
     # Chunking
