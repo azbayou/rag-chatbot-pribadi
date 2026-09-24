@@ -64,7 +64,7 @@ def format_docs(docs):
     return "\n\n".join(doc.page_content for doc in docs)
 
 llm = ChatGoogleGenerativeAI(
-    model="gemini-1.5-flash",
+    model="gemini-flash-lite-latest",
     google_api_key=gemini_key,
     temperature=0.3
 )
