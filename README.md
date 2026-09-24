@@ -13,22 +13,14 @@ A Retrieval-Augmented Generation (RAG) chatbot designed to answer questions inte
 ---
 
 ## 📌 Alur Arsitektur (System Architecture)
-[ CV (.pdf) & Catatan (.txt) ]
-│
-▼
-[ Chunking (RecursiveCharacterTextSplitter) ]
-│
-▼
-[ Vector Embedding (models/gemini-embedding-2) ]
-│
-▼
-[ Vector Store (ChromaDB) ] ◄─── (User Query via Streamlit UI)
-│
-▼
-[ Relevant Context Retrieval (k=3) ]
-│
-▼
-[ Gemini 1.5 Flash LLM ] ───► [ Jawaban Contextual & Akurat ]
+```text
+.
+├──  [ CV (.pdf) & Catatan (.txt) ]
+├──  [ Chunking (RecursiveCharacterTextSplitter) ]
+├──  [ Vector Embedding (models/gemini-embedding-2) ]
+├──  [ Vector Store (ChromaDB) ] ◄─── (User Query via Streamlit UI)
+├──  [ Relevant Context Retrieval (k=3) ]
+└──  [ Gemini 1.5 Flash LLM ] ───► [ Jawaban Contextual & Akurat ]
 
 ---
 
