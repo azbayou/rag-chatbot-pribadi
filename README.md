@@ -7,7 +7,7 @@ A Retrieval-Augmented Generation (RAG) chatbot designed to answer questions inte
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python)
 ![LangChain](https://img.shields.io/badge/Framework-LangChain-green)
-![Gemini](https://img.shields.io/badge/Model-Gemini_1.5_Flash-orange?logo=google)
+![Gemini](https://img.shields.io/badge/Model-Gemini_Flash-Lite-orange?logo=google)
 ![Streamlit](https://img.shields.io/badge/Frontend-Streamlit-red?logo=streamlit)
 
 ---
