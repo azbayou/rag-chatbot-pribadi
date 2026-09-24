@@ -21,7 +21,7 @@ A Retrieval-Augmented Generation (RAG) chatbot designed to answer questions inte
 ├──  [ Vector Store (ChromaDB) ] ◄─── (User Query via Streamlit UI)
 ├──  [ Relevant Context Retrieval (k=3) ]
 └──  [ Gemini 1.5 Flash LLM ] ───► [ Jawaban Contextual & Akurat ]
-
+```
 ---
 
 ## 🛠️ Tech Stack
@@ -45,25 +45,36 @@ A Retrieval-Augmented Generation (RAG) chatbot designed to answer questions inte
 ├── cv.pdf           # Document CV pribadi
 ├── catatan.txt      # Catatan tambahan / portfolio notes
 └── README.md        # Dokumentasi proyek
+```
+
 ---
 
 🚀 Jalankan Secara Lokal (Local Setup)
 1. Clone repository ini:
-```git clone [https://github.com/azbayou/rag-chatbot-pribadi.git](https://github.com/azbayou/rag-chatbot-pribadi.git)
+```python
+git clone [https://github.com/azbayou/rag-chatbot-pribadi.git](https://github.com/azbayou/rag-chatbot-pribadi.git)
 cd rag-chatbot-pribadi
+```
 
 2. Buat & aktifkan virtual environment (opsional tapi disarankan):
-```python -m venv venv
+```python
+python -m venv venv
 source venv/bin/activate  # Linux/Mac
 # atau: venv\Scripts\activate  # Windows
+```
 
 3. Install dependencies:
-```pip install -r requirements.txt
+```python
+pip install -r requirements.txt
+```
 
 4. Atur API Key Gemini:
 Buat folder .streamlit di root folder, lalu buat file secrets.toml
-```GEMINI_API_KEY = "API_KEY_GEMINI_ANDA"
+```python
+GEMINI_API_KEY = "API_KEY_GEMINI_ANDA"
+```
 
 5. Jalankan aplikasi Streamlit:
-```streamlit run app.py
-
+```python
+streamlit run app.py
+```
