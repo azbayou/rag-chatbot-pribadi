@@ -45,7 +45,7 @@ A Retrieval-Augmented Generation (RAG) chatbot designed to answer questions inte
 ├── cv.pdf           # Document CV pribadi
 ├── catatan.txt      # Catatan tambahan / portfolio notes
 └── README.md        # Dokumentasi proyek
-
+```
 ---
 
 🚀 Jalankan Secara Lokal (Local Setup)
