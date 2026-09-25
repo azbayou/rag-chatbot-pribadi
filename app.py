@@ -206,7 +206,7 @@ def get_combined_context(query: str) -> str:
 
 # 5. Setup LLM & Prompt dengan Restriksi Domain
 llm = ChatGoogleGenerativeAI(
-    model="gemini-flash-lite-latest",
+    model="gemini-flash-latest",
     google_api_key=gemini_key,
     temperature=0.2
 )
