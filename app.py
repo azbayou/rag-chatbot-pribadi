@@ -13,10 +13,76 @@ from langchain_core.output_parsers import StrOutputParser
 # 1. Konfigurasi Halaman Streamlit
 st.set_page_config(page_title="Chat Miyo", page_icon="🐱")
 
+st.markdown("""
+<style>
+    /* Styling latar belakang area chat bergaya WhatsApp */
+    .stApp {
+        background-color: #efeae2;
+    }
+
+    /* Dasar Container Chat Message */
+    div[data-testid="stChatMessage"] {
+        padding: 10px 14px;
+        border-radius: 12px;
+        margin-bottom: 10px;
+        max-width: 80%;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.12);
+    }
+
+    /* Pesan User (Rata Kanan - Gelembung Hijau WhatsApp) */
+    div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]),
+    div[data-testid="stChatMessage"]:has(span[data-testid="stChatMessageAvatarUser"]) {
+        flex-direction: row-reverse !important;
+        margin-left: auto !important;
+        background-color: #dcf8c6 !important;
+        border-bottom-right-radius: 2px !important;
+    }
+
+    div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]) p {
+        color: #111b21 !important;
+    }
+
+    /* Pesan Assistant / Miyo (Rata Kiri - Gelembung Putih WhatsApp) */
+    div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarAssistant"]),
+    div[data-testid="stChatMessage"]:has(img) {
+        flex-direction: row !important;
+        margin-right: auto !important;
+        background-color: #ffffff !important;
+        border-bottom-left-radius: 2px !important;
+    }
+
+    div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarAssistant"]) p,
+    div[data-testid="stChatMessage"]:has(img) p {
+        color: #111b21 !important;
+    }
+
+    /* Penyesuaian Otomatis untuk Mode Gelap (Dark Mode) */
+    @media (prefers-color-scheme: dark) {
+        .stApp {
+            background-color: #0b141a;
+        }
+        div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]) {
+            background-color: #005c4b !important;
+        }
+        div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]) p {
+            color: #e9edef !important;
+        }
+        div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarAssistant"]),
+        div[data-testid="stChatMessage"]:has(img) {
+            background-color: #202c33 !important;
+        }
+        div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarAssistant"]) p,
+        div[data-testid="stChatMessage"]:has(img) p {
+            color: #e9edef !important;
+        }
+    }
+</style>
+""", unsafe_allow_html=True)
+
 col1, col2 = st.columns([1, 8])
 with col1:
     try:
-        title_logo = Image.open("2_20260925_193506_0001.png")
+        title_logo = Image.open("2_20260925_193506_0001.jpg")
         st.image(title_logo, width=80)
     except FileNotFoundError:
         st.markdown("<h1>🐱</h1>", unsafe_allow_html=True) # Fallback jika gambar tidak ditemukan
@@ -180,7 +246,7 @@ rag_chain = (
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-miyo_avatar = "1_20260925_193506_0000.png"
+miyo_avatar = "1_20260925_193506_0000.jpg"
 
 # Tampilkan riwayat percakapan
 for message in st.session_state.messages:
