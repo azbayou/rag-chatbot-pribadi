@@ -208,7 +208,7 @@ def get_combined_context(query: str) -> str:
 llm = ChatGoogleGenerativeAI(
     model="gemini-flash-lite-latest",
     google_api_key=gemini_key,
-    temperature=0.3
+    temperature=0.2
 )
 
 template = """IDENTITAS & PERAN]
