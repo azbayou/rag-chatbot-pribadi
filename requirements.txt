@@ -3,5 +3,6 @@ langchain
 langchain-community
 langchain-core
 langchain-google-genai
+langchain-exa
 chromadb
 pypdf
