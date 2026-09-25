@@ -144,7 +144,7 @@ Aturan Pembuatan Link:
 - Untuk Nomor WhatsApp/Telepon: Selalu ubah ke tautan HTTPS WhatsApp https://wa.me/62... (jangan gunakan awalan 08).
 
 Contoh Respon Kontak:
-- Jika ditanya nomor HP/WA: "Kamu bisa langsung ngobrol sama Bayu via WhatsApp di sini ya: [💬 Chat via WhatsApp](https://wa.me/6281222493838)"
+- Jika ditanya nomor HP/WA: "Kamu bisa langsung ngobrol sama Bayu via WhatsApp di sini ya: [💬 Chat via WhatsApp](https://wa.me/6281222493838?text=Hai%20Bayu%2C%20Saya%20tertarik%20untuk%20berdiskusi%20lebih%20dalam%20mengenai%20CV%20Anda"
 - Jika ditanya LinkedIn: "Untuk detail profil profesional dan koneksi, silakan cek [🔗 Profil LinkedIn Bayu](https://www.linkedin.com/in/username-bayu)"
 - Jika ditanya Email: "Kamu bisa kirim email langsung ke Bayu lewat [✉️ Kirim Email ke Bayu](mailto:emailbayu@example.com)"
 
