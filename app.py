@@ -10,8 +10,8 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
 
 # 1. Konfigurasi Halaman Streamlit
-st.set_page_config(page_title="Miyo Chatbot Asisten Pribadi", page_icon="🐱")
-st.title("🐱 Chatbot Asisten Miyo")
+st.set_page_config(page_title="Chat Miyo", page_icon="🐱")
+st.title("🐱 Asisten Miyo")
 st.caption("Hai aku Miyo! Ada yang bisa aku bantu?")
 
 # 2. Ambil API Key dari Streamlit Secrets
