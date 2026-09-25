@@ -1,5 +1,6 @@
 import os
 import streamlit as st
+from PIL import Image
 from langchain_community.document_loaders import PyPDFLoader, TextLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
@@ -11,8 +12,18 @@ from langchain_core.output_parsers import StrOutputParser
 
 # 1. Konfigurasi Halaman Streamlit
 st.set_page_config(page_title="Chat Miyo", page_icon="🐱")
-st.title("🐱 Asisten Miyo")
-st.caption("Hai aku Miyo! Ada yang bisa aku bantu?")
+
+col1, col2 = st.columns([1, 8])
+with col1:
+    try:
+        title_logo = Image.open("2_20260925_193506_0001.jpg")
+        st.image(title_logo, width=80)
+    except FileNotFoundError:
+        st.markdown("<h1>🐱</h1>", unsafe_allow_html=True) # Fallback jika gambar tidak ditemukan
+
+with col2:
+    st.title("Asisten Miyo")
+    st.caption("Hai aku Miyo! Ada yang bisa aku bantu?")
 
 # 2. Ambil API Key dari Streamlit Secrets
 if "GEMINI_API_KEY" in st.secrets:
@@ -169,9 +180,12 @@ rag_chain = (
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
+miyo_avatar = "1_20260925_193506_0000.jpg"
+
 # Tampilkan riwayat percakapan
 for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
+    avatar = miyo_avatar if message["role"] == "assistant" else None
+    with st.chat_message(message["role"], avatar=avatar):
         st.markdown(message["content"])
 
 # Input Chat Pengguna
@@ -180,7 +194,7 @@ if user_input := st.chat_input("Tanyakan seputar Bayu Aziz, Data, atau AI..."):
     with st.chat_message("user"):
         st.markdown(user_input)
 
-    with st.chat_message("assistant"):
+    with st.chat_message("assistant", avatar=miyo_avatar):
         with st.spinner("Miyo sedang berpikir..."):
             response = rag_chain.invoke(user_input)
             st.markdown(response)
