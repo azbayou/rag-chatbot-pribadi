@@ -149,7 +149,7 @@ def load_vectorstore():
         documents.extend(txt_loader.load())
         
     # Chunking
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100)
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=200)
     chunks = text_splitter.split_documents(documents)
     
     # Embedding Model
