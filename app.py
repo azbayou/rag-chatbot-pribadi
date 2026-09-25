@@ -84,10 +84,10 @@ st.markdown("""
             background-color: #0b141a;
         }
         div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]) {
-            background-color: #004b7a !important;
+            background-color: #add8e6 !important;
         }
         div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]) p {
-            color: #e9edef !important;
+            color: #004b7a !important;
         }
         div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarAssistant"]),
         div[data-testid="stChatMessage"]:has(img) {
