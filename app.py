@@ -29,29 +29,30 @@ st.markdown("""
         box-shadow: 0 1px 2px rgba(0,0,0,0.12);
     }
 
-    /* Pesan User = urutan ganjil (selalu tampil duluan tiap giliran) - Rata Kanan - Gelembung Biru Muda */
-    div[data-testid="stChatMessage"]:nth-of-type(odd) {
+    /* Pesan User (Rata Kanan - Gelembung Biru Muda) */
+    div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]),
+    div[data-testid="stChatMessage"]:has(span[data-testid="stChatMessageAvatarUser"]) {
         flex-direction: row-reverse !important;
         margin-left: auto !important;
-        margin-right: 0 !important;
         background-color: #d0e8ff !important;
         border-bottom-right-radius: 2px !important;
     }
 
-    div[data-testid="stChatMessage"]:nth-of-type(odd) p {
+    div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]) p {
         color: #111b21 !important;
     }
 
-    /* Pesan Assistant / Miyo = urutan genap - Rata Kiri - Gelembung Biru Muda */
-    div[data-testid="stChatMessage"]:nth-of-type(even) {
+    /* Pesan Assistant / Miyo (Rata Kiri - Gelembung Biru Muda) */
+    div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarAssistant"]),
+    div[data-testid="stChatMessage"]:has(img) {
         flex-direction: row !important;
         margin-right: auto !important;
-        margin-left: 0 !important;
         background-color: #eaf4ff !important;
         border-bottom-left-radius: 2px !important;
     }
 
-    div[data-testid="stChatMessage"]:nth-of-type(even) p {
+    div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarAssistant"]) p,
+    div[data-testid="stChatMessage"]:has(img) p {
         color: #111b21 !important;
     }
 
@@ -82,16 +83,18 @@ st.markdown("""
         .stApp {
             background-color: #0b141a;
         }
-        div[data-testid="stChatMessage"]:nth-of-type(odd) {
+        div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]) {
             background-color: #1b4965 !important;
         }
-        div[data-testid="stChatMessage"]:nth-of-type(odd) p {
+        div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]) p {
             color: #e9edef !important;
         }
-        div[data-testid="stChatMessage"]:nth-of-type(even) {
+        div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarAssistant"]),
+        div[data-testid="stChatMessage"]:has(img) {
             background-color: #12303f !important;
         }
-        div[data-testid="stChatMessage"]:nth-of-type(even) p {
+        div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarAssistant"]) p,
+        div[data-testid="stChatMessage"]:has(img) p {
             color: #e9edef !important;
         }
         
