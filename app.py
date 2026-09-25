@@ -118,7 +118,7 @@ st.markdown("""
 col1, col2 = st.columns([1, 8])
 with col1:
     try:
-        title_logo = Image.open("2_20260925_193506_0001.png")
+        title_logo = Image.open("images/2_20260925_193506_0001.png")
         st.image(title_logo, width=80)
     except FileNotFoundError:
         st.markdown("<h1>🐱</h1>", unsafe_allow_html=True) # Fallback jika gambar tidak ditemukan
@@ -144,13 +144,13 @@ def load_vectorstore():
     documents = []
     
     # Load CV jika ada
-    if os.path.exists("CV Bayu Aziz - 090926.pdf"):
-        pdf_loader = PyPDFLoader("CV Bayu Aziz - 090926.pdf")
+    if os.path.exists("knowledges/CV Bayu Aziz - 090926.pdf"):
+        pdf_loader = PyPDFLoader("knowledges/CV Bayu Aziz - 090926.pdf")
         documents.extend(pdf_loader.load())
         
     # Load Catatan jika ada
-    if os.path.exists("QnA about Bayu Aziz.txt"):
-        txt_loader = TextLoader("QnA about Bayu Aziz.txt", encoding="utf-8")
+    if os.path.exists("knowledges/QnA about Bayu Aziz.txt"):
+        txt_loader = TextLoader("knowledges/QnA about Bayu Aziz.txt", encoding="utf-8")
         documents.extend(txt_loader.load())
         
     # Chunking
@@ -283,8 +283,8 @@ rag_chain = (
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-miyo_avatar = "1_20260925_193506_0000.png"
-user_avatar = "ava_user.png"
+miyo_avatar = "images/1_20260925_193506_0000.png"
+user_avatar = "images/ava_user.png"
 
 # Tampilkan riwayat percakapan
 for message in st.session_state.messages:
