@@ -84,7 +84,7 @@ st.markdown("""
             background-color: #0b141a;
         }
         div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]) {
-            background-color: #005c4b !important;
+            background-color: #004b7a !important;
         }
         div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]) p {
             color: #e9edef !important;
