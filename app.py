@@ -37,8 +37,8 @@ st.markdown("""
         background-color: #d0e8ff !important;
         border-bottom-right-radius: 2px !important;
     }
-
-    div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]) p {
+    div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]) p,
+    div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]) li {
         color: #111b21 !important;
     }
 
@@ -52,7 +52,9 @@ st.markdown("""
     }
 
     div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarAssistant"]) p,
-    div[data-testid="stChatMessage"]:has(img) p {
+    div[data-testid="stChatMessage"]:has(img) p,
+    div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarAssistant"]) li,
+    div[data-testid="stChatMessage"]:has(img) li {
         color: #111b21 !important;
     }
 
@@ -61,7 +63,7 @@ st.markdown("""
         display: inline-block;
         padding: 6px 16px;
         margin: 4px 2px;
-        background-color: #00AED1; /* Warna Hijau cerah khas tombol */
+        background-color: #25D366; /* Warna Hijau cerah khas tombol */
         color: #ffffff !important;
         text-decoration: none !important;
         border-radius: 20px;
@@ -86,7 +88,8 @@ st.markdown("""
         div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]) {
             background-color: #1b4965 !important;
         }
-        div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]) p {
+        div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]) p,
+        div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]) li {
             color: #e9edef !important;
         }
         div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarAssistant"]),
@@ -94,7 +97,9 @@ st.markdown("""
             background-color: #12303f !important;
         }
         div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarAssistant"]) p,
-        div[data-testid="stChatMessage"]:has(img) p {
+        div[data-testid="stChatMessage"]:has(img) p,
+        div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarAssistant"]) li,
+        div[data-testid="stChatMessage"]:has(img) li {
             color: #e9edef !important;
         }
         
@@ -170,7 +175,7 @@ with st.spinner("Mempersiapkan dokumen lokal..."):
     vectorstore = load_vectorstore()
 
 # 4. Setup Retrievers (Lokal & Exa Search)
-local_retriever = vectorstore.as_retriever(search_kwargs={"k": 5})
+local_retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
 
 exa_retriever = None
 if exa_key:
@@ -211,7 +216,7 @@ llm = ChatGoogleGenerativeAI(
     temperature=0.2
 )
 
-template = """IDENTITAS & PERAN]
+template = """[IDENTITAS & PERAN]
 Kamu adalah Miyo, asisten virtual berbasis AI yang cerdas, ramah, hangat, dan sangat menyenangkan diajak berdiskusi (seperti Gemini).
 Tugas utamamu adalah mewakili Bayu Aziz di halaman portofolio/CV interaktifnya. Kamu hadir untuk memberikan informasi sejelas, seseru, dan senyaman mungkin tentang latar belakang, keahlian, serta pengalaman profesional Bayu.
 
