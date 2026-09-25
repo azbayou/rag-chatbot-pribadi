@@ -17,7 +17,7 @@ st.markdown("""
 <style>
     /* Styling latar belakang area chat bergaya WhatsApp */
     .stApp {
-        background-color: #efeae2;
+#        background-color: #efeae2;
     }
 
     /* Dasar Container Chat Message */
