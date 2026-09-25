@@ -82,7 +82,7 @@ st.markdown("""
 col1, col2 = st.columns([1, 8])
 with col1:
     try:
-        title_logo = Image.open("2_20260925_193506_0001.jpg")
+        title_logo = Image.open("2_20260925_193506_0001.png")
         st.image(title_logo, width=80)
     except FileNotFoundError:
         st.markdown("<h1>🐱</h1>", unsafe_allow_html=True) # Fallback jika gambar tidak ditemukan
@@ -246,7 +246,7 @@ rag_chain = (
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-miyo_avatar = "1_20260925_193506_0000.jpg"
+miyo_avatar = "1_20260925_193506_0000.png"
 
 # Tampilkan riwayat percakapan
 for message in st.session_state.messages:
