@@ -12,7 +12,7 @@ from langchain_core.output_parsers import StrOutputParser
 # 1. Konfigurasi Halaman Streamlit
 st.set_page_config(page_title="Miyo Chatbot Asisten Pribadi", page_icon="🐱")
 st.title("🐱 Chatbot Asisten Miyo")
-st.caption("Tanyakan mengenai CV/Catatan Bayu, atau perkembangan seputar Data & AI!")
+st.caption("Hai aku Miyo! Ada yang bisa aku bantu?")
 
 # 2. Ambil API Key dari Streamlit Secrets
 if "GEMINI_API_KEY" in st.secrets:
