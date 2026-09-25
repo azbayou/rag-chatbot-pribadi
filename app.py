@@ -17,7 +17,7 @@ st.markdown("""
 <style>
     /* Styling latar belakang area chat bergaya WhatsApp */
     .stApp {
-        background-color: #efeae2;
+       # background-color: #efeae2;
     }
 
     /* Dasar Container Chat Message */
@@ -113,7 +113,7 @@ st.markdown("""
 col1, col2 = st.columns([1, 8])
 with col1:
     try:
-        title_logo = Image.open("2_20260925_193506_0001.jpg")
+        title_logo = Image.open("2_20260925_193506_0001.png")
         st.image(title_logo, width=80)
     except FileNotFoundError:
         st.markdown("<h1>🐱</h1>", unsafe_allow_html=True) # Fallback jika gambar tidak ditemukan
@@ -211,7 +211,7 @@ llm = ChatGoogleGenerativeAI(
     temperature=0.2
 )
 
-template = """[IDENTITAS & PERAN]
+template = """IDENTITAS & PERAN]
 Kamu adalah Miyo, asisten virtual berbasis AI yang cerdas, ramah, hangat, dan sangat menyenangkan diajak berdiskusi (seperti Gemini).
 Tugas utamamu adalah mewakili Bayu Aziz di halaman portofolio/CV interaktifnya. Kamu hadir untuk memberikan informasi sejelas, seseru, dan senyaman mungkin tentang latar belakang, keahlian, serta pengalaman profesional Bayu.
 
@@ -277,19 +277,18 @@ rag_chain = (
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-miyo_avatar = "1_20260925_193506_0000.jpg"
-user_avatar = "ava_user.png"
+miyo_avatar = "1_20260925_193506_0000.png"
 
 # Tampilkan riwayat percakapan
 for message in st.session_state.messages:
-    avatar = miyo_avatar if message["role"] == "assistant" else user_avatar
+    avatar = miyo_avatar if message["role"] == "assistant" else None
     with st.chat_message(message["role"], avatar=avatar):
         st.markdown(message["content"])
 
 # Input Chat Pengguna
 if user_input := st.chat_input("Tanyakan seputar Bayu Aziz, Data, atau AI..."):
     st.session_state.messages.append({"role": "user", "content": user_input})
-    with st.chat_message("user", avatar=user_avatar):
+    with st.chat_message("user"):
         st.markdown(user_input)
 
     with st.chat_message("assistant", avatar=miyo_avatar):
