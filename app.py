@@ -63,7 +63,7 @@ st.markdown("""
         display: inline-block;
         padding: 6px 16px;
         margin: 4px 2px;
-        background-color: #25D366; /* Warna Hijau cerah khas tombol */
+        background-color: #008CA8; /* Warna Hijau cerah khas tombol */
         color: #ffffff !important;
         text-decoration: none !important;
         border-radius: 20px;
