@@ -15,7 +15,7 @@ st.set_page_config(page_title="Chat Miyo", page_icon="🐱")
 
 st.markdown("""
 <style>
-    /* Styling latar belakang area chat bergaya WhatsApp */
+    /* Styling latar belakang area chat */
     .stApp {
        # background-color: #efeae2;
     }
@@ -29,22 +29,24 @@ st.markdown("""
         box-shadow: 0 1px 2px rgba(0,0,0,0.12);
     }
 
-    /* Pesan User (Rata Kanan - Gelembung Hijau WhatsApp) */
+    /* Pesan User (Rata Kanan - Gelembung Biru Muda) */
     div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]),
-    div[data-testid="stChatMessage"]:has(span[data-testid="stChatMessageAvatarUser"]) {
+    div[data-testid="stChatMessage"]:has(span[data-testid="stChatMessageAvatarUser"]),
+    div[data-testid="stChatMessage"]:has(img[src*="ava_user"]) {
         flex-direction: row-reverse !important;
         margin-left: auto !important;
-        background-color: #dcf8c6 !important;
+        background-color: #add8e6 !important; /* Diubah menjadi Biru Muda */
         border-bottom-right-radius: 2px !important;
     }
 
-    div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]) p {
+    div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]) p,
+    div[data-testid="stChatMessage"]:has(img[src*="ava_user"]) p {
         color: #111b21 !important;
     }
 
-    /* Pesan Assistant / Miyo (Rata Kiri - Gelembung Putih WhatsApp) */
+    /* Pesan Assistant / Miyo (Rata Kiri - Gelembung Putih) */
     div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarAssistant"]),
-    div[data-testid="stChatMessage"]:has(img) {
+    div[data-testid="stChatMessage"]:has(img[src*="1_20260925"]) {
         flex-direction: row !important;
         margin-right: auto !important;
         background-color: #ffffff !important;
@@ -52,7 +54,7 @@ st.markdown("""
     }
 
     div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarAssistant"]) p,
-    div[data-testid="stChatMessage"]:has(img) p {
+    div[data-testid="stChatMessage"]:has(img[src*="1_20260925"]) p {
         color: #111b21 !important;
     }
 
@@ -83,18 +85,20 @@ st.markdown("""
         .stApp {
             background-color: #0b141a;
         }
-        div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]) {
-            background-color: #005c4b !important;
+        div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]),
+        div[data-testid="stChatMessage"]:has(img[src*="ava_user"]) {
+            background-color: #004b7a !important; /* Biru Gelap untuk Dark Mode */
         }
-        div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]) p {
+        div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]) p,
+        div[data-testid="stChatMessage"]:has(img[src*="ava_user"]) p {
             color: #e9edef !important;
         }
         div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarAssistant"]),
-        div[data-testid="stChatMessage"]:has(img) {
+        div[data-testid="stChatMessage"]:has(img[src*="1_20260925"]) {
             background-color: #202c33 !important;
         }
         div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarAssistant"]) p,
-        div[data-testid="stChatMessage"]:has(img) p {
+        div[data-testid="stChatMessage"]:has(img[src*="1_20260925"]) p {
             color: #e9edef !important;
         }
         
@@ -211,7 +215,7 @@ llm = ChatGoogleGenerativeAI(
     temperature=0.2
 )
 
-template = """IDENTITAS & PERAN]
+template = """[IDENTITAS & PERAN]
 Kamu adalah Miyo, asisten virtual berbasis AI yang cerdas, ramah, hangat, dan sangat menyenangkan diajak berdiskusi (seperti Gemini).
 Tugas utamamu adalah mewakili Bayu Aziz di halaman portofolio/CV interaktifnya. Kamu hadir untuk memberikan informasi sejelas, seseru, dan senyaman mungkin tentang latar belakang, keahlian, serta pengalaman profesional Bayu.
 
@@ -278,19 +282,24 @@ if "messages" not in st.session_state:
     st.session_state.messages = []
 
 miyo_avatar = "1_20260925_193506_0000.png"
+user_avatar = "ava_user.png" # Ditambahkan avatar khusus untuk user
 
 # Tampilkan riwayat percakapan
 for message in st.session_state.messages:
-    avatar = miyo_avatar if message["role"] == "assistant" else None
+    # Menggunakan ava_user.png untuk user dan miyo_avatar untuk assistant
+    avatar = miyo_avatar if message["role"] == "assistant" else user_avatar
     with st.chat_message(message["role"], avatar=avatar):
         st.markdown(message["content"])
 
 # Input Chat Pengguna
 if user_input := st.chat_input("Tanyakan seputar Bayu Aziz, Data, atau AI..."):
     st.session_state.messages.append({"role": "user", "content": user_input})
-    with st.chat_message("user"):
+    
+    # Menampilkan pesan user dengan avatar kustom
+    with st.chat_message("user", avatar=user_avatar):
         st.markdown(user_input)
 
+    # Menampilkan respon bot dengan avatar miyo
     with st.chat_message("assistant", avatar=miyo_avatar):
         with st.spinner("Miyo sedang berpikir..."):
             response = rag_chain.invoke(user_input)
