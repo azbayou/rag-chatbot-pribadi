@@ -29,12 +29,12 @@ st.markdown("""
         box-shadow: 0 1px 2px rgba(0,0,0,0.12);
     }
 
-    /* Pesan User (Rata Kanan - Gelembung Hijau WhatsApp) */
+    /* Pesan User (Rata Kanan - Gelembung Biru Muda) */
     div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]),
     div[data-testid="stChatMessage"]:has(span[data-testid="stChatMessageAvatarUser"]) {
         flex-direction: row-reverse !important;
         margin-left: auto !important;
-        background-color: #dcf8c6 !important;
+        background-color: #d0e8ff !important;
         border-bottom-right-radius: 2px !important;
     }
 
@@ -84,7 +84,7 @@ st.markdown("""
             background-color: #0b141a;
         }
         div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]) {
-            background-color: #005c4b !important;
+            background-color: #1b4965 !important;
         }
         div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]) p {
             color: #e9edef !important;
@@ -278,17 +278,18 @@ if "messages" not in st.session_state:
     st.session_state.messages = []
 
 miyo_avatar = "1_20260925_193506_0000.png"
+user_avatar = "ava_user.png"
 
 # Tampilkan riwayat percakapan
 for message in st.session_state.messages:
-    avatar = miyo_avatar if message["role"] == "assistant" else None
+    avatar = miyo_avatar if message["role"] == "assistant" else user_avatar
     with st.chat_message(message["role"], avatar=avatar):
         st.markdown(message["content"])
 
 # Input Chat Pengguna
 if user_input := st.chat_input("Tanyakan seputar Bayu Aziz, Data, atau AI..."):
     st.session_state.messages.append({"role": "user", "content": user_input})
-    with st.chat_message("user"):
+    with st.chat_message("user", avatar=user_avatar):
         st.markdown(user_input)
 
     with st.chat_message("assistant", avatar=miyo_avatar):
