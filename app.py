@@ -100,7 +100,7 @@ st.markdown("""
         
         /* Warna tombol link sedikit disesuaikan untuk dark mode */
         div[data-testid="stChatMessage"] a {
-            background-color: #00a884;
+            background-color: ##00D4FF;
             color: #111b21 !important;
         }
         div[data-testid="stChatMessage"] a:hover {
