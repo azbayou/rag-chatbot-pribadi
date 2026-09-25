@@ -17,7 +17,7 @@ st.markdown("""
 <style>
     /* Styling latar belakang area chat bergaya WhatsApp */
     .stApp {
-#        background-color: #efeae2;
+       # background-color: #efeae2;
     }
 
     /* Dasar Container Chat Message */
@@ -56,6 +56,28 @@ st.markdown("""
         color: #111b21 !important;
     }
 
+    /* Styling Tombol Link (Tautan Kontak) di dalam Chat */
+    div[data-testid="stChatMessage"] a {
+        display: inline-block;
+        padding: 6px 16px;
+        margin: 4px 2px;
+        background-color: #25D366; /* Warna Hijau cerah khas tombol */
+        color: #ffffff !important;
+        text-decoration: none !important;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.9em;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+        transition: all 0.2s ease-in-out;
+        border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    div[data-testid="stChatMessage"] a:hover {
+        background-color: #128C7E;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    }
+
     /* Penyesuaian Otomatis untuk Mode Gelap (Dark Mode) */
     @media (prefers-color-scheme: dark) {
         .stApp {
@@ -74,6 +96,15 @@ st.markdown("""
         div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarAssistant"]) p,
         div[data-testid="stChatMessage"]:has(img) p {
             color: #e9edef !important;
+        }
+        
+        /* Warna tombol link sedikit disesuaikan untuk dark mode */
+        div[data-testid="stChatMessage"] a {
+            background-color: #00a884;
+            color: #111b21 !important;
+        }
+        div[data-testid="stChatMessage"] a:hover {
+            background-color: #008f6f;
         }
     }
 </style>
