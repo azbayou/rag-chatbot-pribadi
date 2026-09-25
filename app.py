@@ -4,14 +4,15 @@ from langchain_community.document_loaders import PyPDFLoader, TextLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
 from langchain_community.vectorstores import Chroma
+from langchain_exa import ExaSearchRetriever
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
 
 # 1. Konfigurasi Halaman Streamlit
 st.set_page_config(page_title="RAG Chatbot Asisten Pribadi", page_icon="🤖")
-st.title("🤖 Chatbot Asisten Pribadi")
-st.caption("Tanyakan apa saja mengenai CV dan Catatan saya!")
+st.title("🤖 Chatbot Asisten Pribadi Miyo")
+st.caption("Tanyakan mengenai CV/Catatan Bayu, atau perkembangan seputar Data & AI!")
 
 # 2. Ambil API Key dari Streamlit Secrets
 if "GEMINI_API_KEY" in st.secrets:
@@ -20,7 +21,11 @@ else:
     st.error("API Key 'GEMINI_API_KEY' belum diatur di Streamlit Secrets!")
     st.stop()
 
-# 3. Inisialisasi Vectorstore (Di-cache agar efisien)
+exa_key = st.secrets.get("EXA_API_KEY", None)
+if not exa_key:
+    st.warning("⚠️ 'EXA_API_KEY' belum diatur di Streamlit Secrets. Fitur pencarian web Exa tidak akan aktif.")
+
+# 3. Inisialisasi Vectorstore Lokal (Di-cache)
 @st.cache_resource
 def load_vectorstore():
     documents = []
@@ -45,7 +50,7 @@ def load_vectorstore():
         google_api_key=gemini_key
     )
     
-    # Simpan ke ChromaDB (in-memory di server)
+    # Simpan ke ChromaDB
     vectorstore = Chroma.from_documents(
         documents=chunks,
         embedding=embeddings,
@@ -53,30 +58,64 @@ def load_vectorstore():
     )
     return vectorstore
 
-# Jalankan loading vectorstore dengan indikator loading
-with st.spinner("Mempersiapkan dokumen..."):
+with st.spinner("Mempersiapkan dokumen lokal..."):
     vectorstore = load_vectorstore()
 
-# 4. Setup RAG Chain
-retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
+# 4. Setup Retrievers (Lokal & Exa Search)
+local_retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
 
-def format_docs(docs):
-    return "\n\n".join(doc.page_content for doc in docs)
+exa_retriever = None
+if exa_key:
+    exa_retriever = ExaSearchRetriever(
+        exa_api_key=exa_key,
+        k=2,
+        highlights=True
+    )
 
+def get_combined_context(query: str) -> str:
+    """Mengambil informasi dari retriever lokal (dokumen) dan Exa API (web)."""
+    # 1. Cari dokumen lokal
+    local_docs = local_retriever.invoke(query)
+    local_text = "\n".join([doc.page_content for doc in local_docs])
+    
+    # 2. Cari via Exa Search jika API Key tersedia
+    exa_text = ""
+    if exa_retriever:
+        try:
+            exa_docs = exa_retriever.invoke(query)
+            exa_text = "\n".join([doc.page_content for doc in exa_docs])
+        except Exception as e:
+            exa_text = f"(Gagal mengambil data dari Exa Search: {e})"
+            
+    exa_display = exa_text if exa_text else "Tidak ada data pencarian web."
+    combined_context = f"""--- DOKUMEN LOKAL (CV & CATATAN BAYU) ---
+{local_text}
+
+--- HASIL PENCARIAN WEB (EXA SEARCH) ---
+{exa_display}"""
+    
+    return combined_context
+
+# 5. Setup LLM & Prompt dengan Restriksi Domain
 llm = ChatGoogleGenerativeAI(
     model="gemini-flash-lite-latest",
     google_api_key=gemini_key,
     temperature=0.3
 )
 
-template = """Kamu adalah asisten pribadi AI yang cerdas dan ramah. 
-Jawablah pertanyaan pengguna hanya berdasarkan konteks dokumen (CV dan Catatan) yang diberikan di bawah ini.
-Jika informasi tidak tersedia di dalam dokumen, katakan secara jujur bahwa kamu tidak mengetahuinya.
+template = """Kamu adalah Miyo, asisten pribadi AI yang imut, lucu, cerdas dan ramah.
+Gaya bahasa Miyo santai tapi tetap formal.
+
+Aturan Penting Menjawab:
+1. Utamakan informasi dari **DOKUMEN LOKAL** jika pertanyaan berhubungan dengan Bayu Aziz, CV, latar belakang, atau catatan pribadinya.
+2. Gunakan **HASIL PENCARIAN WEB (EXA SEARCH)** HANYA jika pertanyaan berkaitan dengan topik **Data, Artificial Intelligence (AI), Machine Learning, Software Engineering, atau bidang teknologi yang relevan** dengan latar belakang di dokumen lokal.
+3. **PENTING (Grounded Scope)**: Jika pertanyaan pengguna melenceng jauh dari konteks (misalnya tentang resep masakan, ramalan zodiak, gosip selebriti, olahraga, atau topik umum di luar Data/AI/Teknologi & profil Bayu Aziz), **TOLAK pertanyaan tersebut secara ramah dan imut**. Jelaskan bahwa Miyo hanya bisa membantu menjawab hal-hal seputar Bayu Aziz, Data, AI, dan teknologi terkait.
+4. Jika pertanyaan relevan dengan topik Data/AI/Bayu tetapi jawabannya tidak ditemukan di dokumen lokal maupun web search, katakan secara jujur dan sopan bahwa kamu belum mengetahuinya.
 
 Konteks:
 {context}
 
-Pertanyaan: 
+Pertanyaan:
 {question}
 
 Jawaban:"""
@@ -84,13 +123,13 @@ Jawaban:"""
 prompt = ChatPromptTemplate.from_template(template)
 
 rag_chain = (
-    {"context": retriever | format_docs, "question": RunnablePassthrough()}
+    {"context": get_combined_context, "question": RunnablePassthrough()}
     | prompt
     | llm
     | StrOutputParser()
 )
 
-# 5. UI Interface Chat Streamlit
+# 6. UI Interface Chat Streamlit
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
@@ -100,15 +139,13 @@ for message in st.session_state.messages:
         st.markdown(message["content"])
 
 # Input Chat Pengguna
-if user_input := st.chat_input("Tanyakan sesuatu..."):
-    # Simpan & tampilkan pesan user
+if user_input := st.chat_input("Tanyakan seputar Bayu Aziz, Data, atau AI..."):
     st.session_state.messages.append({"role": "user", "content": user_input})
     with st.chat_message("user"):
         st.markdown(user_input)
 
-    # Respon AI
     with st.chat_message("assistant"):
-        with st.spinner("Mencari jawaban..."):
+        with st.spinner("Miyo sedang berpikir..."):
             response = rag_chain.invoke(user_input)
             st.markdown(response)
             
