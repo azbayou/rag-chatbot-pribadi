@@ -42,12 +42,12 @@ st.markdown("""
         color: #111b21 !important;
     }
 
-    /* Pesan Assistant / Miyo (Rata Kiri - Gelembung Putih WhatsApp) */
+    /* Pesan Assistant / Miyo (Rata Kiri - Gelembung Biru Muda) */
     div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarAssistant"]),
     div[data-testid="stChatMessage"]:has(img) {
         flex-direction: row !important;
         margin-right: auto !important;
-        background-color: #ffffff !important;
+        background-color: #eaf4ff !important;
         border-bottom-left-radius: 2px !important;
     }
 
@@ -91,7 +91,7 @@ st.markdown("""
         }
         div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarAssistant"]),
         div[data-testid="stChatMessage"]:has(img) {
-            background-color: #202c33 !important;
+            background-color: #12303f !important;
         }
         div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarAssistant"]) p,
         div[data-testid="stChatMessage"]:has(img) p {
