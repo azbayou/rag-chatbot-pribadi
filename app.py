@@ -17,7 +17,7 @@ st.markdown("""
 <style>
     /* Styling latar belakang area chat bergaya WhatsApp */
     .stApp {
-        background-color: #efeae2;
+       # background-color: #efeae2;
     }
 
     /* Dasar Container Chat Message */
@@ -113,7 +113,7 @@ st.markdown("""
 col1, col2 = st.columns([1, 8])
 with col1:
     try:
-        title_logo = Image.open("2_20260925_193506_0001.jpg")
+        title_logo = Image.open("2_20260925_193506_0001.png")
         st.image(title_logo, width=80)
     except FileNotFoundError:
         st.markdown("<h1>🐱</h1>", unsafe_allow_html=True) # Fallback jika gambar tidak ditemukan
@@ -149,7 +149,7 @@ def load_vectorstore():
         documents.extend(txt_loader.load())
         
     # Chunking
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100)
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=200)
     chunks = text_splitter.split_documents(documents)
     
     # Embedding Model
@@ -208,10 +208,10 @@ def get_combined_context(query: str) -> str:
 llm = ChatGoogleGenerativeAI(
     model="gemini-flash-lite-latest",
     google_api_key=gemini_key,
-    temperature=0.3
+    temperature=0.2
 )
 
-template = """[IDENTITAS & PERAN]
+template = """IDENTITAS & PERAN]
 Kamu adalah Miyo, asisten virtual berbasis AI yang cerdas, ramah, hangat, dan sangat menyenangkan diajak berdiskusi (seperti Gemini).
 Tugas utamamu adalah mewakili Bayu Aziz di halaman portofolio/CV interaktifnya. Kamu hadir untuk memberikan informasi sejelas, seseru, dan senyaman mungkin tentang latar belakang, keahlian, serta pengalaman profesional Bayu.
 
@@ -239,6 +239,7 @@ Tugas utamamu adalah mewakili Bayu Aziz di halaman portofolio/CV interaktifnya. 
    Jika pengguna menanyakan tools, bahasa pemrograman, atau metode yang belum ada di riwayat Bayu (misal: Python, Tableau, Snowflake):
    - Jelaskan fungsi tools/metode tersebut secara ringkas dan cerdas.
    - Hubungkan secara jujur dengan tools sejenis yang sudah sangat dikuasai oleh Bayu.
+   - Fokusnya adalah skill dan kemampuan Bayu Aziz, jangan bandingkan dengan orang lain!.
    - Contoh Respon: "Snowflake itu platform cloud data warehouse yang canggih banget untuk olah data skala besar. Nah, kalau untuk Snowflake sendiri Bayu memang belum ada riwayat penggunaan langsung, tapi Bayu sudah terbiasa mengolah database menggunakan kueri SQL, Metabase, Redash, dan Google Data Studio. Jadi secara logika alur datanya, Bayu bisa cepat menyesuaikan!"
 
 [FORMAT TOMBOL & LINK REDIRECT (MANDATORI)]
@@ -255,13 +256,13 @@ Contoh Respon Kontak:
 - Email: "Atau kamu bisa kirim pesan langsung via email ke [✉️ Email Bayu Aziz](mailto:azbayou@gmail.com)"
 - Portofolio Web: "Intip juga hasil karya & portofolionya di [🌐 Web Portofolio Bayu](http://azbayou.github.io/profile)"
 
-Konteks Dokumen:
+Konteks:
 {context}
 
-Pertanyaan Pengguna:
+Pertanyaan:
 {question}
 
-Jawaban Miyo:"""
+Jawaban:"""
 
 prompt = ChatPromptTemplate.from_template(template)
 
@@ -277,18 +278,17 @@ if "messages" not in st.session_state:
     st.session_state.messages = []
 
 miyo_avatar = "1_20260925_193506_0000.png"
-user_avatar = "ava_user.png"
 
 # Tampilkan riwayat percakapan
 for message in st.session_state.messages:
-    avatar = miyo_avatar if message["role"] == "assistant" else user_avatar
+    avatar = miyo_avatar if message["role"] == "assistant" else None
     with st.chat_message(message["role"], avatar=avatar):
         st.markdown(message["content"])
 
 # Input Chat Pengguna
 if user_input := st.chat_input("Tanyakan seputar Bayu Aziz, Data, atau AI..."):
     st.session_state.messages.append({"role": "user", "content": user_input})
-    with st.chat_message("user", avatar=user_avatar):
+    with st.chat_message("user"):
         st.markdown(user_input)
 
     with st.chat_message("assistant", avatar=miyo_avatar):
