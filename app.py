@@ -170,7 +170,7 @@ with st.spinner("Mempersiapkan dokumen lokal..."):
     vectorstore = load_vectorstore()
 
 # 4. Setup Retrievers (Lokal & Exa Search)
-local_retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
+local_retriever = vectorstore.as_retriever(search_kwargs={"k": 5})
 
 exa_retriever = None
 if exa_key:
