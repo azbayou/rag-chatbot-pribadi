@@ -124,7 +124,7 @@ with col1:
         st.markdown("<h1>🐱</h1>", unsafe_allow_html=True) # Fallback jika gambar tidak ditemukan
 
 with col2:
-    st.title("Asisten Miyo")
+    st.subheader("Asisten Miyo")
     st.caption("Hai aku Miyo! Ada yang bisa aku bantu?")
 
 # 2. Ambil API Key dari Streamlit Secrets
