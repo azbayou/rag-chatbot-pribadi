@@ -40,7 +40,7 @@ st.markdown("""
     
     /* Styling gelembung chat (target div terakhir yaitu isi chat) */
     div[data-testid="stChatMessage"]:has(.user-msg-hook) > div:last-child {
-        background-color: #d9fdd3 !important; /* Hijau cerah ala WA */
+        background-color: ##94E6F4 !important; /* Hijau cerah ala WA */
         color: #111b21 !important;
         padding: 10px 14px;
         border-radius: 12px;
@@ -65,7 +65,7 @@ st.markdown("""
 
     /* Styling gelembung chat Miyo */
     div[data-testid="stChatMessage"]:has(.bot-msg-hook) > div:last-child {
-        background-color: #ffffff !important;
+        background-color: ##FDF9E8 !important;
         color: #111b21 !important;
         padding: 10px 14px;
         border-radius: 12px;
