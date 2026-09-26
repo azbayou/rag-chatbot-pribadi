@@ -40,7 +40,7 @@ st.markdown("""
     
     /* Styling gelembung chat (target div terakhir yaitu isi chat) */
     div[data-testid="stChatMessage"]:has(.user-msg-hook) > div:last-child {
-        background-color: #d9fdd3 !important; /* Hijau cerah ala WA */
+        background-color: #D3F1FD !important; /* Hijau cerah ala WA */
         color: #111b21 !important;
         padding: 10px 14px;
         border-radius: 12px;
