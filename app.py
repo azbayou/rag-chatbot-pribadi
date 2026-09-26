@@ -65,7 +65,7 @@ st.markdown("""
 
     /* Styling gelembung chat Miyo */
     div[data-testid="stChatMessage"]:has(.bot-msg-hook) > div:last-child {
-        background-color: #ffffff !important;
+        background-color: #FBF1A9 !important;
         color: #111b21 !important;
         padding: 10px 14px;
         border-radius: 12px;
