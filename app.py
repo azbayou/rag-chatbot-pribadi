@@ -334,9 +334,3 @@ if user_input := st.chat_input("Tanyakan seputar Bayu Aziz, Data, atau AI..."):
             st.markdown(f"<span class='bot-msg-hook'></span>\n\n{response}", unsafe_allow_html=True)
             
     st.session_state.messages.append({"role": "assistant", "content": response})
-```eof
-
-**Perubahan yang saya buat:**
-1. **Injeksi Identifier Tak Kasatmata:** Saya menyematkan `<span class='user-msg-hook'></span>` dan `<span class='bot-msg-hook'></span>` pada setiap pesan yang dirender `st.markdown()`. Ini menjamin CSS dapat secara spesifik mendeteksi pesan tersebut dari User atau Miyo.
-2. **Reverse Flex Direction:** Pesan yang memiliki identifier user akan menggunakan `flex-direction: row-reverse`. Hal ini membalik posisi avatar ke sebelah kanan layaknya WhatsApp tanpa merusak urutan kode HTML Streamlit.
-3. **Styling Bubble:** Ekor chat (border-radius) dimodifikasi di mana user punya ekor lancip di kanan atas, sedangkan Miyo di kiri atas. Palet warnanya juga sudah disesuaikan persis seperti WhatsApp (Light & Dark Mode).
