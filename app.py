@@ -13,57 +13,81 @@ from langchain_core.output_parsers import StrOutputParser
 # 1. Konfigurasi Halaman Streamlit
 st.set_page_config(page_title="Chat Miyo", page_icon="🐱")
 
+# --- KUSTOMISASI CSS UI WHATSAPP ---
 st.markdown("""
 <style>
     /* Styling latar belakang area chat bergaya WhatsApp */
     .stApp {
-       # background-color: #efeae2;
+        # background-color: #efeae2;
     }
 
-    /* Dasar Container Chat Message */
+    /* Container Dasar Pesan Streamlit */
     div[data-testid="stChatMessage"] {
+        background-color: transparent !important;
+        border: none !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        margin-bottom: 15px;
+    }
+
+    /* ----------------------------------------------------
+       PESAN USER (Rata Kanan - Gelembung Hijau Muda)
+       ---------------------------------------------------- */
+    /* Balik urutan elemen agar avatar ada di kanan */
+    div[data-testid="stChatMessage"]:has(.user-msg-hook) {
+        flex-direction: row-reverse !important;
+    }
+    
+    /* Styling gelembung chat (target div terakhir yaitu isi chat) */
+    div[data-testid="stChatMessage"]:has(.user-msg-hook) > div:last-child {
+        background-color: #d9fdd3 !important; /* Hijau cerah ala WA */
+        color: #111b21 !important;
         padding: 10px 14px;
         border-radius: 12px;
-        margin-bottom: 10px;
-        max-width: 80%;
-        box-shadow: 0 1px 2px rgba(0,0,0,0.12);
+        border-top-right-radius: 0px; /* Ekor gelembung di kanan atas */
+        margin-right: 8px; /* Jarak antara teks dan avatar */
+        margin-left: 20%; /* Mencegah bubble terlalu lebar */
+        box-shadow: 0 1px 1px rgba(0,0,0,0.15);
     }
-
-    /* Pesan User (Rata Kanan - Gelembung Biru Muda) */
-    div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]),
-    div[data-testid="stChatMessage"]:has(span[data-testid="stChatMessageAvatarUser"]) {
-        flex-direction: row-reverse !important;
-        margin-left: auto !important;
-        background-color: #d0e8ff !important;
-        border-bottom-right-radius: 2px !important;
-    }
-    div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]) p,
-    div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]) li {
+    
+    div[data-testid="stChatMessage"]:has(.user-msg-hook) p,
+    div[data-testid="stChatMessage"]:has(.user-msg-hook) li {
         color: #111b21 !important;
     }
 
-    /* Pesan Assistant / Miyo (Rata Kiri - Gelembung Biru Muda) */
-    div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarAssistant"]),
-    div[data-testid="stChatMessage"]:has(img) {
+    /* ----------------------------------------------------
+       PESAN MIYO (Rata Kiri - Gelembung Putih)
+       ---------------------------------------------------- */
+    /* Urutan normal (avatar di kiri) */
+    div[data-testid="stChatMessage"]:has(.bot-msg-hook) {
         flex-direction: row !important;
-        margin-right: auto !important;
-        background-color: #eaf4ff !important;
-        border-bottom-left-radius: 2px !important;
     }
 
-    div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarAssistant"]) p,
-    div[data-testid="stChatMessage"]:has(img) p,
-    div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarAssistant"]) li,
-    div[data-testid="stChatMessage"]:has(img) li {
+    /* Styling gelembung chat Miyo */
+    div[data-testid="stChatMessage"]:has(.bot-msg-hook) > div:last-child {
+        background-color: #ffffff !important;
+        color: #111b21 !important;
+        padding: 10px 14px;
+        border-radius: 12px;
+        border-top-left-radius: 0px; /* Ekor gelembung di kiri atas */
+        margin-left: 8px;
+        margin-right: 20%;
+        box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+    }
+    
+    div[data-testid="stChatMessage"]:has(.bot-msg-hook) p,
+    div[data-testid="stChatMessage"]:has(.bot-msg-hook) li {
         color: #111b21 !important;
     }
 
-    /* Styling Tombol Link (Tautan Kontak) di dalam Chat */
+    /* ----------------------------------------------------
+       STYLING TOMBOL LINK DALAM CHAT
+       ---------------------------------------------------- */
     div[data-testid="stChatMessage"] a {
         display: inline-block;
         padding: 6px 16px;
         margin: 4px 2px;
-        background-color: #008CA8; /* Warna Hijau cerah khas tombol */
+        background-color: #008CA8; 
         color: #ffffff !important;
         text-decoration: none !important;
         border-radius: 20px;
@@ -80,30 +104,33 @@ st.markdown("""
         box-shadow: 0 4px 6px rgba(0,0,0,0.2);
     }
 
-    /* Penyesuaian Otomatis untuk Mode Gelap (Dark Mode) */
+    /* ----------------------------------------------------
+       DARK MODE (Sesuai tema WA Dark)
+       ---------------------------------------------------- */
     @media (prefers-color-scheme: dark) {
         .stApp {
-            background-color: #0b141a;
+            background-color: #0b141a !important;
         }
-        div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]) {
-            background-color: #1b4965 !important;
+        
+        /* Chat User Mode Gelap */
+        div[data-testid="stChatMessage"]:has(.user-msg-hook) > div:last-child {
+            background-color: #005c4b !important;
         }
-        div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]) p,
-        div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarUser"]) li {
-            color: #e9edef !important;
-        }
-        div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarAssistant"]),
-        div[data-testid="stChatMessage"]:has(img) {
-            background-color: #12303f !important;
-        }
-        div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarAssistant"]) p,
-        div[data-testid="stChatMessage"]:has(img) p,
-        div[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageAvatarAssistant"]) li,
-        div[data-testid="stChatMessage"]:has(img) li {
+        div[data-testid="stChatMessage"]:has(.user-msg-hook) p,
+        div[data-testid="stChatMessage"]:has(.user-msg-hook) li {
             color: #e9edef !important;
         }
         
-        /* Warna tombol link sedikit disesuaikan untuk dark mode */
+        /* Chat Miyo Mode Gelap */
+        div[data-testid="stChatMessage"]:has(.bot-msg-hook) > div:last-child {
+            background-color: #202c33 !important;
+        }
+        div[data-testid="stChatMessage"]:has(.bot-msg-hook) p,
+        div[data-testid="stChatMessage"]:has(.bot-msg-hook) li {
+            color: #e9edef !important;
+        }
+        
+        /* Tombol Link Mode Gelap */
         div[data-testid="stChatMessage"] a {
             background-color: #00a884;
             color: #111b21 !important;
@@ -286,21 +313,30 @@ if "messages" not in st.session_state:
 miyo_avatar = "images/1_20260925_193506_0000.png"
 user_avatar = "images/ava_user.jpeg"
 
-# Tampilkan riwayat percakapan
+# Tampilkan riwayat percakapan dengan Hook HTML
 for message in st.session_state.messages:
     avatar = miyo_avatar if message["role"] == "assistant" else user_avatar
     with st.chat_message(message["role"], avatar=avatar):
-        st.markdown(message["content"])
+        # Menyisipkan class span tak kasatmata agar CSS bisa mendeteksi role
+        hook = "<span class='bot-msg-hook'></span>" if message["role"] == "assistant" else "<span class='user-msg-hook'></span>"
+        st.markdown(f"{hook}\n\n{message['content']}", unsafe_allow_html=True)
 
 # Input Chat Pengguna
 if user_input := st.chat_input("Tanyakan seputar Bayu Aziz, Data, atau AI..."):
     st.session_state.messages.append({"role": "user", "content": user_input})
+    
     with st.chat_message("user", avatar=user_avatar):
-        st.markdown(user_input)
+        st.markdown(f"<span class='user-msg-hook'></span>\n\n{user_input}", unsafe_allow_html=True)
 
     with st.chat_message("assistant", avatar=miyo_avatar):
         with st.spinner("Miyo sedang berpikir..."):
             response = rag_chain.invoke(user_input)
-            st.markdown(response)
+            st.markdown(f"<span class='bot-msg-hook'></span>\n\n{response}", unsafe_allow_html=True)
             
     st.session_state.messages.append({"role": "assistant", "content": response})
+```eof
+
+**Perubahan yang saya buat:**
+1. **Injeksi Identifier Tak Kasatmata:** Saya menyematkan `<span class='user-msg-hook'></span>` dan `<span class='bot-msg-hook'></span>` pada setiap pesan yang dirender `st.markdown()`. Ini menjamin CSS dapat secara spesifik mendeteksi pesan tersebut dari User atau Miyo.
+2. **Reverse Flex Direction:** Pesan yang memiliki identifier user akan menggunakan `flex-direction: row-reverse`. Hal ini membalik posisi avatar ke sebelah kanan layaknya WhatsApp tanpa merusak urutan kode HTML Streamlit.
+3. **Styling Bubble:** Ekor chat (border-radius) dimodifikasi di mana user punya ekor lancip di kanan atas, sedangkan Miyo di kiri atas. Palet warnanya juga sudah disesuaikan persis seperti WhatsApp (Light & Dark Mode).
