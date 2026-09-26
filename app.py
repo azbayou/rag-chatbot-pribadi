@@ -284,7 +284,7 @@ if "messages" not in st.session_state:
     st.session_state.messages = []
 
 miyo_avatar = "images/1_20260925_193506_0000.png"
-user_avatar = "images/ava_user.png"
+user_avatar = "images/ava_user.jpeg"
 
 # Tampilkan riwayat percakapan
 for message in st.session_state.messages:
