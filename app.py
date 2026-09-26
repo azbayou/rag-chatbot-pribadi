@@ -109,7 +109,7 @@ st.markdown("""
        ---------------------------------------------------- */
     @media (prefers-color-scheme: dark) {
         .stApp {
-            background-color: #0b141a !important;
+            background-color: #214E64 !important;
         }
         
         /* Chat User Mode Gelap */
