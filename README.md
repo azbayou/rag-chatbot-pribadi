@@ -1,5 +1,5 @@
 # rag-chatbot-pribadi
-link : bay-ragcb.streamlit.app
+🔗 **Live Website:** [https://bay-ragcb.streamlit.app/](https://bay-ragcb.streamlit.app/)
 
 # 🤖 Personal RAG Assistant Chatbot
 
