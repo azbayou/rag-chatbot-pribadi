@@ -14,12 +14,11 @@ from langchain_core.output_parsers import StrOutputParser
 st.set_page_config(page_title="Chat Miyo", page_icon="🐱")
 
 # --- KUSTOMISASI CSS UI WHATSAPP ---
-st.markdown("""
+CUSTOM_CSS_JS = """
 <style>
-    /* Paksa warna background default hitam/putih murni (tanpa rona biru) */
-    [data-testid="stAppViewContainer"], [data-testid="stHeader"] {
-        background-color: #ffffff !important;
-    }
+    /* ============================================
+       DEFAULT (LIGHT MODE) STYLES
+       ============================================ */
 
     /* Container Dasar Pesan Streamlit */
     div[data-testid="stChatMessage"] {
@@ -33,23 +32,19 @@ st.markdown("""
     /* ----------------------------------------------------
        PESAN USER (Rata Kanan - Gelembung Hijau Muda)
        ---------------------------------------------------- */
-    /* Balik urutan elemen agar avatar ada di kanan */
     div[data-testid="stChatMessage"]:has(.user-msg-hook) {
         flex-direction: row-reverse !important;
     }
-    
-    /* Styling gelembung chat (target div terakhir yaitu isi chat) */
     div[data-testid="stChatMessage"]:has(.user-msg-hook) > div:last-child {
-        background-color: #D3F1FD !important; /* Hijau cerah ala WA */
+        background-color: #D3F1FD !important;
         color: #111b21 !important;
         padding: 10px 14px;
         border-radius: 12px;
-        border-top-right-radius: 0px; /* Ekor gelembung di kanan atas */
-        margin-right: 8px; /* Jarak antara teks dan avatar */
-        margin-left: 20%; /* Mencegah bubble terlalu lebar */
+        border-top-right-radius: 0px;
+        margin-right: 8px;
+        margin-left: 20%;
         box-shadow: 0 1px 1px rgba(0,0,0,0.15);
     }
-    
     div[data-testid="stChatMessage"]:has(.user-msg-hook) p,
     div[data-testid="stChatMessage"]:has(.user-msg-hook) li {
         color: #111b21 !important;
@@ -58,23 +53,19 @@ st.markdown("""
     /* ----------------------------------------------------
        PESAN MIYO (Rata Kiri - Gelembung Putih)
        ---------------------------------------------------- */
-    /* Urutan normal (avatar di kiri) */
     div[data-testid="stChatMessage"]:has(.bot-msg-hook) {
         flex-direction: row !important;
     }
-
-    /* Styling gelembung chat Miyo */
     div[data-testid="stChatMessage"]:has(.bot-msg-hook) > div:last-child {
         background-color: #E7E7E7 !important;
         color: #111b21 !important;
         padding: 10px 14px;
         border-radius: 12px;
-        border-top-left-radius: 0px; /* Ekor gelembung di kiri atas */
+        border-top-left-radius: 0px;
         margin-left: 8px;
         margin-right: 20%;
         box-shadow: 0 1px 1px rgba(0,0,0,0.15);
     }
-    
     div[data-testid="stChatMessage"]:has(.bot-msg-hook) p,
     div[data-testid="stChatMessage"]:has(.bot-msg-hook) li {
         color: #111b21 !important;
@@ -87,7 +78,7 @@ st.markdown("""
         display: inline-block;
         padding: 6px 16px;
         margin: 4px 2px;
-        background-color: #008CA8; 
+        background-color: #008CA8;
         color: #ffffff !important;
         text-decoration: none !important;
         border-radius: 20px;
@@ -97,51 +88,72 @@ st.markdown("""
         transition: all 0.2s ease-in-out;
         border: 1px solid rgba(0,0,0,0.05);
     }
-
     div[data-testid="stChatMessage"] a:hover {
         background-color: #128C7E;
         transform: translateY(-2px);
         box-shadow: 0 4px 6px rgba(0,0,0,0.2);
     }
 
-    /* ----------------------------------------------------
-       DARK MODE (Sesuai tema WA Dark)
-       ---------------------------------------------------- */
-    @media (prefers-color-scheme: dark) {
-        /* Paksa warna background hitam murni */
-        [data-testid="stAppViewContainer"], [data-testid="stHeader"] {
-            background-color: #000000 !important;
-        }
-        
-        /* Chat User Mode Gelap */
-        div[data-testid="stChatMessage"]:has(.user-msg-hook) > div:last-child {
-            background-color: #2C6885 !important;
-        }
-        div[data-testid="stChatMessage"]:has(.user-msg-hook) p,
-        div[data-testid="stChatMessage"]:has(.user-msg-hook) li {
-            color: #e9edef !important;
-        }
-        
-        /* Chat Miyo Mode Gelap */
-        div[data-testid="stChatMessage"]:has(.bot-msg-hook) > div:last-child {
-            background-color: #202c33 !important;
-        }
-        div[data-testid="stChatMessage"]:has(.bot-msg-hook) p,
-        div[data-testid="stChatMessage"]:has(.bot-msg-hook) li {
-            color: #e9edef !important;
-        }
-        
-        /* Tombol Link Mode Gelap */
-        div[data-testid="stChatMessage"] a {
-            background-color: #00a884;
-            color: #111b21 !important;
-        }
-        div[data-testid="stChatMessage"] a:hover {
-            background-color: #008f6f;
-        }
+    /* ============================================
+       TEMA BACKGROUND (Dideteksi lewat JavaScript)
+       ============================================ */
+    html[data-st-theme="dark"] [data-testid="stAppViewContainer"],
+    html[data-st-theme="dark"] [data-testid="stHeader"] {
+        background-color: #000000 !important;
+    }
+    html[data-st-theme="light"] [data-testid="stAppViewContainer"],
+    html[data-st-theme="light"] [data-testid="stHeader"] {
+        background-color: #ffffff !important;
+    }
+
+    /* Chat User Mode Gelap */
+    html[data-st-theme="dark"] div[data-testid="stChatMessage"]:has(.user-msg-hook) > div:last-child {
+        background-color: #2C6885 !important;
+    }
+    html[data-st-theme="dark"] div[data-testid="stChatMessage"]:has(.user-msg-hook) p,
+    html[data-st-theme="dark"] div[data-testid="stChatMessage"]:has(.user-msg-hook) li {
+        color: #e9edef !important;
+    }
+
+    /* Chat Miyo Mode Gelap */
+    html[data-st-theme="dark"] div[data-testid="stChatMessage"]:has(.bot-msg-hook) > div:last-child {
+        background-color: #202c33 !important;
+    }
+    html[data-st-theme="dark"] div[data-testid="stChatMessage"]:has(.bot-msg-hook) p,
+    html[data-st-theme="dark"] div[data-testid="stChatMessage"]:has(.bot-msg-hook) li {
+        color: #e9edef !important;
+    }
+
+    /* Tombol Link Mode Gelap */
+    html[data-st-theme="dark"] div[data-testid="stChatMessage"] a {
+        background-color: #00a884;
+        color: #111b21 !important;
+    }
+    html[data-st-theme="dark"] div[data-testid="stChatMessage"] a:hover {
+        background-color: #008f6f;
     }
 </style>
-""", unsafe_allow_html=True)
+
+<script>
+(function() {
+    function fixTheme() {
+        var c = document.querySelector('[data-testid="stAppViewContainer"]');
+        if (!c) return;
+        var bg = getComputedStyle(c).backgroundColor;
+        var m = bg.match(/[0-9]+/g);
+        if (!m || m.length < 3) return;
+        var r = parseInt(m[0]), g = parseInt(m[1]), b = parseInt(m[2]);
+        var bright = (r * 299 + g * 587 + b * 114) / 1000;
+        var isDark = bright < 128;
+        document.documentElement.setAttribute('data-st-theme', isDark ? 'dark' : 'light');
+    }
+    new MutationObserver(fixTheme).observe(document.documentElement,
+        {attributes: true, childList: true, subtree: true});
+    [100, 500, 2000].forEach(function(t) { setTimeout(fixTheme, t); });
+})();
+</script>
+"""
+st.markdown(CUSTOM_CSS_JS, unsafe_allow_html=True)
 
 col1, col2 = st.columns([1, 8])
 with col1:
