@@ -109,12 +109,12 @@ st.markdown("""
        ---------------------------------------------------- */
     @media (prefers-color-scheme: dark) {
         .stApp {
-            background-color: #000000 !important;
+            background-color: #2C6885 !important;
         }
         
         /* Chat User Mode Gelap */
         div[data-testid="stChatMessage"]:has(.user-msg-hook) > div:last-child {
-            background-color: #005c4b !important;
+            background-color: #000000 !important;
         }
         div[data-testid="stChatMessage"]:has(.user-msg-hook) p,
         div[data-testid="stChatMessage"]:has(.user-msg-hook) li {
