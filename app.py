@@ -16,9 +16,9 @@ st.set_page_config(page_title="Chat Miyo", page_icon="🐱")
 # --- KUSTOMISASI CSS UI WHATSAPP ---
 st.markdown("""
 <style>
-    /* Styling latar belakang area chat bergaya WhatsApp */
-    .stApp {
-        # background-color: #efeae2;
+    /* Paksa warna background default hitam/putih murni (tanpa rona biru) */
+    [data-testid="stAppViewContainer"], [data-testid="stHeader"] {
+        background-color: #ffffff !important;
     }
 
     /* Container Dasar Pesan Streamlit */
@@ -108,7 +108,8 @@ st.markdown("""
        DARK MODE (Sesuai tema WA Dark)
        ---------------------------------------------------- */
     @media (prefers-color-scheme: dark) {
-        .stApp {
+        /* Paksa warna background hitam murni */
+        [data-testid="stAppViewContainer"], [data-testid="stHeader"] {
             background-color: #000000 !important;
         }
         
